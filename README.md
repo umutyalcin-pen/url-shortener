@@ -22,50 +22,6 @@
 
 ---
 
-### 🇹🇷 GitHub Açıklaması 
-Renk Kodu Üreticisi (CSS Linear Gradient) 🎨
-Kullanıcıların anında önizleme yaparak özelleştirilmiş CSS lineer gradyan kodları oluşturmasını sağlayan şık bir araç. İki renk tonu ve gradyan açısı kolayca ayarlanabilir.
-
-Özellikler: Etkileşimli kontroller, canlı önizleme, otomatik Hex/CSS kodu üretimi.
-
-Tasarım: Dark mode, "Glassmorphism" ve neon efektleri.
-
----
-
-### 🇬🇧 English Description 
-Color Code Generator (CSS Linear Gradient) 🎨
-A stylish web tool that allows users to create customized CSS linear gradient codes with an instant preview. Easily adjust two color hues and the gradient angle.
-
-Features: Interactive controls, live preview, automatic Hex/CSS code generation.
-
-Design: Dark mode, "Glassmorphism," and neon aesthetics.
-
-
----
-
-## 💻 Proje Teknolojileri: / Project Technologies:
-
-<p align="left">
-    <a href="https://www.w3schools.com/html/" target="_blank" rel="noreferrer">
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="html" width="40" height="40"/>
-    </a>
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="vscode" width="40" height="40"/>
-    </a>
-    <a href="https://desktop.github.com/" target="_blank" rel="noreferrer">
-        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github desktop" width="40" height="40"/>
-    </a>
-</p>
-
----
-
-## ℹ️ Ek Bilgiler / Additional Information
-
-* Bu basit site ile tek tıkla istediğiniz renk paletini oluşturup anında css kodunu yazınıza kopyalayabilirsiniz.
-* With this simple site, you can create the color palette you want with a single click and copy it to your text by instantly coding it with CSS.
-
----
-
 
 # 🔗 URL Kısaltıcı
 
@@ -82,6 +38,20 @@ Basit, şık ve kullanımı kolay bir URL kısaltıcı uygulaması.
 - 📊 Tıklama sayacı
 - 📋 Tek tıkla kopyalama
 - 📱 Mobil uyumlu tasarım
+
+# 🔗 URL Shortener
+A simple, elegant and easy-to-use URL shortener application.
+
+✨ Features
+🎨 Modern and sleek interface (glassmorphism design)
+
+🔗 Smart short code generation based on site name
+
+📊 Click counter
+
+📋 One-click copy
+
+📱 Mobile responsive design
 
 ## 🚀 Kurulum
 
@@ -127,7 +97,23 @@ url-shortener/
 - URL'ler bellekte tutulur, sunucu yeniden başlatıldığında silinir
 - Sadece yerel kullanım içindir (localhost)
 
+
+## 💻 Proje Teknolojileri: / Project Technologies:
+
+<p align="left">
+    <a href="https://www.w3schools.com/html/" target="_blank" rel="noreferrer">
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="html" width="40" height="40"/>
+    </a>
+    <a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer">
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="vscode" width="40" height="40"/>
+    </a>
+    <a href="https://desktop.github.com/" target="_blank" rel="noreferrer">
+        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github desktop" width="40" height="40"/>
+    </a>
+</p>
+
 ## 📄 Lisans
 
 MIT License
+
 
