@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Kısaltıcı</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            background: #ffffff;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-icon svg {
+            width: 32px;
+            height: 32px;
+            color: #1a1a2e;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(200, 200, 200, 0.5);
+            border-radius: 14px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .input-group input:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            margin-top: 28px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            display: none;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-url {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .url-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 18px;
+        }
+
+        .result-url a {
+            flex: 1;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .result-url a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-copy {
+            padding: 10px 20px;
+            background: #ffffff;
+            color: #000000;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            flex-shrink: 0;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.02);
+        }
+
+        .btn-copy.copied {
+            background: #4ade80;
+            color: #000000;
+        }
+
+        .original-url {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .original-url span {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .error {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            border-radius: 12px;
+            color: #ff6b7a;
+            font-size: 14px;
+            display: none;
+            animation: slideIn 0.4s ease;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: #1a1a2e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                </div>
+                <h1>URL Kısaltıcı</h1>
+                <p class="subtitle">Uzun URL'lerinizi anında kısaltın · Türkiye ve Global kısımdaki sitelerin hepsine
+                    ulaşın</p>
+            </div>
+
+            <form id="shortenerForm">
+                <div class="input-group">
+                    <input type="url" id="urlInput" placeholder="https://örnek.com/çok-uzun-bir-url" required
+                        autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span id="btnText">Kısalt</span>
+                    <div class="spinner" id="spinner" style="display: none;"></div>
+                </button>
+            </form>
+
+            <div class="result" id="result">
+                <div class="result-label">Kısaltılmış URL <span class="badge" id="shortCodeBadge"></span></div>
+                <div class="result-url">
+                    <div class="url-box">
+                        <a href="#" id="shortUrl" target="_blank"></a>
+                        <button type="button" class="btn btn-copy" id="copyBtn">Kopyala</button>
+                    </div>
+                </div>
+                <div class="original-url">
+                    <span>Orijinal:</span> <span id="originalUrl"></span>
+                </div>
+            </div>
+
+            <div class="error" id="error"></div>
+        </div>
+
+        <p class="footer"><a href="https://github.com/umutyalcin-pen" target="_blank"
+                style="color: rgba(255, 255, 255, 0.5); text-decoration: none; transition: color 0.2s;">GitHub</a>
+        </p>
+    </div>
+
+    <script>
+        const form = document.getElementById('shortenerForm');
+        const urlInput = document.getElementById('urlInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const spinner = document.getElementById('spinner');
+        const result = document.getElementById('result');
+        const shortUrl = document.getElementById('shortUrl');
+        const originalUrl = document.getElementById('originalUrl');
+        const shortCodeBadge = document.getElementById('shortCodeBadge');
+        const copyBtn = document.getElementById('copyBtn');
+        const errorDiv = document.getElementById('error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const url = urlInput.value.trim();
+            if (!url) return;
+
+            // Reset UI
+            result.classList.remove('show');
+            errorDiv.classList.remove('show');
+
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Kısaltılıyor...';
+            spinner.style.display = 'block';
+
+            try {
+                const response = await fetch('/api/shorten', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Bir hata oluştu');
+                }
+
+                // Show result
+                shortUrl.href = data.shortUrl;
+                shortUrl.textContent = data.shortUrl;
+                originalUrl.textContent = data.originalUrl;
+                shortCodeBadge.textContent = data.shortCode;
+                result.classList.add('show');
+
+                // Reset copy button
+                copyBtn.textContent = 'Kopyala';
+                copyBtn.classList.remove('copied');
+
+            } catch (error) {
+                errorDiv.textContent = error.message || 'URL kısaltılırken bir hata oluştu.';
+                errorDiv.classList.add('show');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.textContent = 'Kısalt';
+                spinner.style.display = 'none';
+            }
+        });
+
+        copyBtn.addEventListener('click', async () => {
+            const url = shortUrl.textContent;
+
+            try {
+                await navigator.clipboard.writeText(url);
+                copyBtn.textContent = 'Kopyalandı!';
+                copyBtn.classList.add('copied');
+
+                setTimeout(() => {
+                    copyBtn.textContent = 'Kopyala';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                copyBtn.textContent = 'Kopyalandı!';
+                copyBtn.classList.add('copied');
+
+                setTimeout(() => {
+                    copyBtn.textContent = 'Kopyala';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }
+        });
+
+        // Focus input on load
+        urlInput.focus();
+    </script>
+</body>
+
+</html>
