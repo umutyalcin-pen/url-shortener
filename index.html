@@ -156,7 +156,6 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -367,11 +366,9 @@
             const url = urlInput.value.trim();
             if (!url) return;
 
-            // Reset UI
             result.classList.remove('show');
             errorDiv.classList.remove('show');
 
-            // Show loading state
             submitBtn.disabled = true;
             btnText.textContent = 'Kısaltılıyor...';
             spinner.style.display = 'block';
@@ -391,14 +388,12 @@
                     throw new Error(data.error || 'Bir hata oluştu');
                 }
 
-                // Show result
                 shortUrl.href = data.shortUrl;
                 shortUrl.textContent = data.shortUrl;
                 originalUrl.textContent = data.originalUrl;
                 shortCodeBadge.textContent = data.shortCode;
                 result.classList.add('show');
 
-                // Reset copy button
                 copyBtn.textContent = 'Kopyala';
                 copyBtn.classList.remove('copied');
 
@@ -406,7 +401,6 @@
                 errorDiv.textContent = error.message || 'URL kısaltılırken bir hata oluştu.';
                 errorDiv.classList.add('show');
             } finally {
-                // Reset button state
                 submitBtn.disabled = false;
                 btnText.textContent = 'Kısalt';
                 spinner.style.display = 'none';
@@ -426,7 +420,6 @@
                     copyBtn.classList.remove('copied');
                 }, 2000);
             } catch (err) {
-                // Fallback for older browsers
                 const textArea = document.createElement('textarea');
                 textArea.value = url;
                 document.body.appendChild(textArea);
@@ -444,7 +437,6 @@
             }
         });
 
-        // Focus input on load
         urlInput.focus();
     </script>
 </body>
